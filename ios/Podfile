@@ -7,6 +7,7 @@ target 'podiatrix' do
   rnPrefix = "../node_modules/react-native"
   
   # React Native and its dependencies
+pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
   pod 'FBLazyVector', :path => "#{rnPrefix}/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "#{rnPrefix}/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "#{rnPrefix}/Libraries/RCTRequired"

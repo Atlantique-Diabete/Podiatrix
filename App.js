@@ -9,6 +9,7 @@ import ReevalScreen from './ReevalScreen'
 
 
 const AppNavigator = createStackNavigator(
+  
   {
     Home: HomeScreen,
     Terrain: TerrainScreen,

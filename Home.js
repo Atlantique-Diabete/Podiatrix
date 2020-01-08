@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import FootDiabService from './FootDiabService';
+import SplashScreen from 'react-native-splash-screen';
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -14,6 +15,11 @@ class HomeScreen extends React.Component {
           super()
       }
 
+      componentDidMount() {
+          SplashScreen.hide()
+      }
+
+      
       onPressButtonTest(footDiabService, navigate) {
         footDiabService.reset(FootDiabService.mode.CLASSIC)
         navigate('WoundState', {footDiabService})
@@ -25,7 +31,9 @@ class HomeScreen extends React.Component {
       }
 
     render() {
-        
+
+      
+
       const {navigate} = this.props.navigation;
       const footDiabService = new FootDiabService()
 
