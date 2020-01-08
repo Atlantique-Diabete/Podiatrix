@@ -139,7 +139,7 @@ render() {
         <Text style={styles.textContainer}>SRIS</Text>
         <View style={{alignItems:'center', marginTop:13}}>
         <Tooltip
-    topAdjustment={Platform.OS === 'android' ? -(StatusBar.currentHeight) : 0}
+    topAdjustment={Platform.OS === 'android' ? 0 : 0}
   isVisible={this.state.toolTipVisible}
   content={<View style={{flex:1, margin:10}}>
       <View style={{flex:1, alignItems: 'center'}}>
