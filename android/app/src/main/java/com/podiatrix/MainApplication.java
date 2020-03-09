@@ -21,6 +21,7 @@ import org.unimodules.core.interfaces.SingletonModule;
 import expo.modules.constants.ConstantsPackage;
 import expo.modules.permissions.PermissionsPackage;
 import expo.modules.filesystem.FileSystemPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+              new RNDeviceInfo(),
           new ReanimatedPackage(),
           new RNGestureHandlerPackage(),
           new RNScreensPackage(),

@@ -30,6 +30,7 @@ class ReevalScreen extends React.Component {
           <View style={{marginRight: 10}}>
             <Icon style={styles.crossContainer}
                 name='cross'
+                underlayColor='transparent'
                 type='entypo' 
                 onPress={() =>  this.test(navigate) }
                 color="#fff"

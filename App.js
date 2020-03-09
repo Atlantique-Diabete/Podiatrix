@@ -6,7 +6,10 @@ import CliniqueScreen from './CliniqueScreen';
 import DiagnosticScreen from './DiagnosticScreen';
 import WoundStateScreen from './WoundStateScreen';
 import ReevalScreen from './ReevalScreen'
-
+import AfterHealingScreen from './AfterHealingScreen'
+import WhoAreWeScreen from './WhoAreWeScreen'
+import HealingAndDumpScreen from './HealingAndDumpScreen'
+import ContactScreen from './ContactScreen'
 
 const AppNavigator = createStackNavigator(
   
@@ -16,7 +19,11 @@ const AppNavigator = createStackNavigator(
     Clinique: CliniqueScreen,
     Diagnostic: DiagnosticScreen,
     WoundState: WoundStateScreen,
-    Reeval: ReevalScreen
+    Reeval: ReevalScreen,
+    AfterHealing: AfterHealingScreen,
+    WhoAreWe: WhoAreWeScreen,
+    HealingAndDump: HealingAndDumpScreen,
+    Contact: ContactScreen
   },
   {
     initialRouteName: 'Home',

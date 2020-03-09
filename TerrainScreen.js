@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
 import { Button, ButtonGroup} from 'react-native-elements';
 import { Icon } from 'react-native-elements'
+import FootDiabService from './FootDiabService';
 
 class TerrainScreen extends React.Component {
     
@@ -29,6 +30,7 @@ class TerrainScreen extends React.Component {
         headerRight: () => (
           <View style={{marginRight: 10}}>
             <Icon style={styles.crossContainer}
+                underlayColor='transparent'
                 name='cross'
                 type='entypo' 
                 onPress={() =>  this.test(navigate) }
@@ -52,6 +54,7 @@ class TerrainScreen extends React.Component {
         this.updateIndex3 = this.updateIndex3.bind(this)
         this.updateIndex4 = this.updateIndex4.bind(this)
       }
+
       updateIndex (selectedIndex) {
         this.setState({selectedIndex})
         this.props.navigation.state.params.footDiabService.insuffisanceCardiac = selectedIndex == 0 ?  false : true
@@ -112,7 +115,7 @@ class TerrainScreen extends React.Component {
         </View>
         
         <View>
-        <Text style={styles.textContainer}>Isolement social</Text>
+        <Text style={styles.textContainer}>Isolement / Précarité</Text>
         <ButtonGroup
             onPress={this.updateIndex3}
             selectedIndex={selectedIndex3}
@@ -151,7 +154,10 @@ class TerrainScreen extends React.Component {
           }
           type='outline'
 //          buttonStyle={{backgroundColor: "#2271b3"}}
-          onPress={() => navigate('Diagnostic', {footDiabService})}
+          onPress={() => {
+            this.props.navigation.state.params.footDiabService.setMode(FootDiabService.mode.CLASSIC)
+            navigate('Diagnostic', {footDiabService})
+        }}
   
         />
         </View>

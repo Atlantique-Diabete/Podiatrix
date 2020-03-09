@@ -37,11 +37,17 @@ pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-
   pod 'glog', :podspec => "#{rnPrefix}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
 
+  
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   # Other native modules
   pod 'RNGestureHandler', :podspec => '../node_modules/react-native-gesture-handler/RNGestureHandler.podspec'
   pod 'RNReanimated', :podspec => '../node_modules/react-native-reanimated/RNReanimated.podspec'
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   # Automatically detect installed unimodules
   use_unimodules!
+ # pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end

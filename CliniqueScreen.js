@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
-import { Button, ButtonGroup, Overlay, CheckBox} from 'react-native-elements';
+import { StyleSheet, View, Alert, ScrollView } from 'react-native';
+import { Button, ButtonGroup, Overlay, CheckBox, Text} from 'react-native-elements';
 import { Icon } from 'react-native-elements'
+import Tooltip from 'react-native-walkthrough-tooltip';
+import { TouchableHighlight } from 'react-native-gesture-handler';
 
 class CliniqueScreen extends React.Component {
       
@@ -29,6 +31,7 @@ static navigationOptions = ({ navigation }) => {
     headerRight: () => (
       <View style={{marginRight: 10}}>
       <Icon style={styles.crossContainer}
+          underlayColor='transparent'
           name='cross'
           type='entypo' 
           onPress={() =>  this.test(navigate) }
@@ -94,11 +97,15 @@ static navigationOptions = ({ navigation }) => {
     }
   }
 
+  isInfected() {
+    return this.props.navigation.state.params.footDiabService.isInfected()
+  }
+
   getTextRiskInfection() {
     if (this.props.navigation.state.params.footDiabService.isInfected()) {
-      return 'Le patient a des risques d’infections'
+      return 'Risques d’infections'
     }
-    return 'Le patient n\'a pas de risques d’infections'
+    return 'Pas de risques d’infections'
   }
 
   componentDidMount(){
@@ -112,6 +119,11 @@ static navigationOptions = ({ navigation }) => {
     this.setState({checkChaleur: this.props.navigation.state.params.footDiabService.chaleur})
     this.setState({checkSecretionsPurulent: this.props.navigation.state.params.footDiabService.secretionsPurulent})
     this.setState({checkAutreCauseInflamation: this.props.navigation.state.params.footDiabService.autreCauseInflamation})
+    if (this.props.navigation.state.params.footDiabService.infectionCounts > 0) {
+      this.setState({infectionsFirstTime: true})  
+    } else {
+      this.setState({infectionsFirstTime: false})  
+    }
 
   }
 
@@ -125,12 +137,29 @@ render() {
     const { selectedIndex3 } = this.state
     const { selectedIndex4 } = this.state
 
+    /*
+              <View style={{flex:1, flexDirection: "row", justifyContent:'center', alignItems:'center'}}>
+            <View style={{marginTop:10, marginRight:2}}>
+          <Icon 
+           // reverse
+            name='hand-pointer-o'
+            type='font-awesome'
+            size={20}
+            color='#03a9f4'
+            onPress={() => {
+                this.setState({toolTipVisible: true})
+            }}/>
+            </View>
+    </View>
+
+    */
+
   return (
     <View style={styles.mainContainer}>
       <ScrollView style={styles.containerScrollView} contentContainerStyle={{flexGrow: 1, justifyContent : 'center'}}>
         
         <View>
-    <Text style={styles.textContainer}>Absence de pouls</Text>
+    <Text style={styles.textContainer}>Absence de pouls périphériques</Text>
     <ButtonGroup
         onPress={this.updateIndex}
         selectedIndex={selectedIndex}
@@ -160,42 +189,31 @@ render() {
         </View>
 
         <View style={{flex:1}}>
-          <View>
-          <View style={{flex:1, flexDirection: "row", justifyContent:'center', alignItems:'center'}}>
-            <View style={{marginTop:10, marginRight:2}}>
-          <Icon 
-           // reverse
-            name='hand-pointer-o'
-            type='font-awesome'
-            size={13}
-            color='#03a9f4'
-            onPress={() => {
-                this.setState({toolTipVisible: true})
-            }}/>
-            </View>
-        <Text style={styles.textContainerInfections} onPress={
-        () => {
-          this.setState({ isVisible: true })
-        }}>Risque d'infections</Text>
+          <TouchableHighlight underlayColor='transparent' onPress={() => {
+            this.setState({ isVisible: true, infectionsFirstTime:true })
+          }}>
+        <View>
+        <Text style={styles.textContainerInfections} h1 h1Style={{fontSize:20}}>Signes d'infections ?</Text>
+        <View style={{marginLeft:10, marginRight:10, marginTop: -5}}>
+        <Button 
+            title={this.getTextRiskInfection()}
+            titleStyle={{
+              color: "white",
+              fontSize: 16
+            }}
+            disabled={!this.state.infectionsFirstTime}
+            buttonStyle={{backgroundColor: this.isInfected() ? "#f44336" : "#4caf50"}}
+        />
         </View>
-        <Button style={{marginLeft:10, marginRight:10, marginTop: 0}}
-        title={this.getTextRiskInfection()}
-        titleStyle={{
-        color: "white",
-        fontSize: 20
-      }}
-      disabled
-      buttonStyle={{backgroundColor: "#2271b3"}}
-      onPress={() => this.setState({isVisible: true} ) }
-    />
-    </View>
+        </View>
+        </TouchableHighlight>
         <Overlay
         width="auto"
         height="auto"
           isVisible={this.state.isVisible}
           onBackdropPress={() => this.setState({ isVisible: false })}>
         <View style={{flexDirection: "column"}}>
-          <Text style={styles.textContainerOverlay}>Risque d'infections</Text>
+          <Text style={styles.textContainerOverlay}>Signes d'infections</Text>
         <CheckBox
         //  center
         right
@@ -231,7 +249,7 @@ render() {
         <CheckBox
         right
         iconRight
-          title='Sensibilité ou douleur localement'
+          title='Sensibilité ou douleur locale'
           checked={this.state.checkSensibiliteDouleurLoc}
           onPress={() => {
             this.setState({checkSensibiliteDouleurLoc: !this.state.checkSensibiliteDouleurLoc})
@@ -274,17 +292,19 @@ render() {
             }
           }}
         />
+          <CheckBox
+          right
+          iconRight
+          textStyle={{fontSize:13}}
+            title={'Autre cause d’inflammation ...' + "\n"  + '(Crise de goutte, phlébite, fracture)'}
+            checked={this.state.checkAutreCauseInflamation}
+            onPress={() => {
 
-        <CheckBox
-        right
-        iconRight
-          title='Autre cause d’inflammation'
-          checked={this.state.checkAutreCauseInflamation}
-          onPress={() => {
-            this.setState({checkAutreCauseInflamation: !this.state.checkAutreCauseInflamation})
-            footDiabService.autreCauseInflamation = !this.state.checkAutreCauseInflamation
-          }}
-        />
+              this.setState({checkAutreCauseInflamation: !this.state.checkAutreCauseInflamation})
+              footDiabService.autreCauseInflamation = !this.state.checkAutreCauseInflamation
+
+            }}
+          />
 
           <View style={{margin:24, marginBottom:12}}>
         <Button style={{marginLeft:24, marginRight:24}}

@@ -4,6 +4,8 @@ import { Button, Text } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 import FootDiabService from './FootDiabService';
 import SplashScreen from 'react-native-splash-screen';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+import DeviceInfo from 'react-native-device-info';
 
 class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -17,6 +19,7 @@ class HomeScreen extends React.Component {
 
       componentDidMount() {
           SplashScreen.hide()
+          console.log('DEVICE:', DeviceInfo.getVersion())
       }
 
       
@@ -30,7 +33,16 @@ class HomeScreen extends React.Component {
         navigate('Reeval', {footDiabService})
       }
 
+      onPressAfterHealing(navigate) {
+        navigate('AfterHealing')
+      }
+
+      onPressHealingAndDump(navigate) {
+        navigate('HealingAndDump')
+      }
+
     render() {
+
 
       
 
@@ -38,85 +50,139 @@ class HomeScreen extends React.Component {
       const footDiabService = new FootDiabService()
 
       return (
-        <View style={styles.mainContainer}>
         <View style={styles.container}>
         <Icon  style={styles.iconLauch}
           name='foot'
-          size= {200}
+          size= {150}
           color='white'
           type='foundation' />
-          <View style={{marginTop: 5, marginBottom:5}}>
+          <View style={{marginTop: 0, marginBottom:4}}>
       <Text style={styles.textContainer} h4 h4Style={{fontSize:18}}>Votre patient diabétique vous</Text>
       <Text style={styles.textContainer} h4 h4Style={{fontSize:18}}>consulte pour un problème de pied.</Text>
       </View>
-          <View style={{marginTop:25}}>
-          <Text style={styles.textContainer} h4 h4Style={{fontSize:16}}>1er contact ?</Text>
-          <View style={{marginRight: 30, marginLeft: 30}}>
-        <Button style={styles.launchButton}
-          title="Lancer le test"
-          titleStyle={{
-            color: "#2271b3",
-            fontSize: 20,
-          }}
-          type='outline'
-          buttonStyle={{backgroundColor: "white"}}
-          iconRight
-      icon={
-        <View style={{position: 'absolute', right: 5}}>
-        <Icon
-        size={30}
-        name='keyboard-arrow-right'
-        type='material-icons'
-        color="#2271b3"
-        />
+      <View style={styles.containerCards}>
+        <TouchableHighlight style={styles.touchableHighlightContainer} onPress={() => {
+          this.onPressButtonTest(footDiabService, navigate)
+        }}>
+          <View  style={styles.item}>
+            <View style={styles.subitem}>
+              <Icon
+                  size={40}
+                  name='activity'
+                  type='feather'
+                  color="#2271b3"
+              />
+              </View>
+          <Text h1 h1Style={styles.textStyleCards}>Première{"\n"}évaluation</Text>
+          </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.touchableHighlightContainer} onPress={() => {
+          this.onPressButtonReeval(footDiabService, navigate)
+        }}>
+          <View style={styles.item}>
+            <View style={styles.subitem}>
+              <Icon
+                  size={40}
+                  name='controller-fast-forward'
+                  type='entypo'
+                  color="#2271b3"
+              />
+              </View>
+         <Text h1 h1Style={styles.textStyleCards}>Réévaluation{"\n"}à 2 semaines</Text>
+          </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.touchableHighlightContainer} onPress={() => {
+            this.onPressHealingAndDump(navigate)
+        }}>
+
+          <View style={styles.item}>
+            <View style={styles.subitem}>
+              <Icon
+                  size={40}
+                  name='heart'
+                  type='foundation'
+                  color="#2271b3"
+                />
+                </View>
+              <Text h1 h1Style={styles.textStyleCards}>Soins{"\n"}et décharge</Text>
+          </View>
+          </TouchableHighlight>
+          <TouchableHighlight style={styles.touchableHighlightContainer} onPress={() => {
+          this.onPressAfterHealing(navigate)
+        }}>
+
+          <View style={styles.item}>
+            <View style={styles.subitem}>
+              <Icon
+                  size={40}
+                  name='healing'
+                  type='material-icons'
+                  color="#2271b3"
+                />
+                </View>
+              <Text h1 h1Style={styles.textStyleCards}>Après{"\n"}cicatrisation</Text>
+          </View>
+          </TouchableHighlight>
+
         </View>
-      }
-          
-          onPress={() => this.onPressButtonTest(footDiabService, navigate)}
-        /> 
+        <View style={{position:'absolute', bottom:10, right:10, borderRadius:30}}>
+              <Icon
+                  underlayColor="transparent"
+                  size={30}
+                  name='info'
+                  type='feather'
+                  color="white"
+                  onPress={() => {
+                    navigate('WhoAreWe')
+                  }}
+                />
         </View>
+        <View style={{position:'absolute', bottom:10, alignSelf:'center'}}>
+          <Text style={{color: '#FAFAFA'}} h1 h1Style={{fontSize: 12, fontWeight:'bold'}}>Version : {DeviceInfo.getVersion()}</Text>
         </View>
-        <View style={{marginTop:30}}>
-        <Text style={styles.textContainer} h4 h4Style={{fontSize:16}}>Réévaluation à 2 semaines ?</Text>
-        <View  style={{marginRight: 30, marginLeft: 30}}>
-        <Button style={styles.launchButton}
-          title="Lancer le test"
-          titleStyle={{
-            color: "#2271b3",
-            fontSize: 20,
-          }}
-          type='outline'
-          buttonStyle={{backgroundColor: "white"}}
-          iconRight
-      icon={
-        <View style={{position: 'absolute', right: 5}}>
-        <Icon
-        size={30}
-        name='keyboard-arrow-right'
-        type='material-icons'
-        color="#2271b3"
-        />
-        </View>
-      }
-          onPress={() => this.onPressButtonReeval(footDiabService, navigate)}
-        />
-        </View>
-        </View>
-      </View>
       </View>
       );
     }
   }
 
   const styles = StyleSheet.create({
-    mainContainer: {
-      flex: 1,
-      backgroundColor: '#2271b3',
-    //  alignItems: 'center',
-      justifyContent: 'center',
+    touchableHighlightContainer: {
+    //  backgroundColor:'red',
+      margin: 10,
+      width:125,
+      borderRadius:5
+      //flex:1,
+    },
+    containerCards: {
+      justifyContent:'center',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      //flex:1,
+//      aspectRatio: 1.025,
+    //  backgroundColor:'green',
+      alignItems: 'flex-start'
+    },
+    subitem: {
+      marginBottom:8
+    },
+    textStyleCards: {
+      fontSize:14,
+      textAlign:'center',
+      color:'#424242',
+      fontWeight:'bold'
+    },
+    item: {
+      //flex:1,
+      alignItems:'center',
+      justifyContent:'center',
+      //aspectRatio: 1.025,
+      height: 120,
+      backgroundColor:'#FAFAFA',
+      padding:0, borderRadius:5, borderWidth: 3, borderColor:'#EDEDED'
     },
     container: {
-      margin: 10,
+      flex:1,
+      padding: 10,
       backgroundColor: '#2271b3',
     //  alignItems: 'center',
       justifyContent: 'center',

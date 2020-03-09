@@ -15,3 +15,12 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-ignorewarnings
+
+-keep class * {
+    public private *;
+}
+
+-keep class io.nlopez.** { *; }
+-dontwarn io.nlopez.**

@@ -37,6 +37,10 @@ class FootDiabService {
         REEVAL: 'reeval'
     }
 
+    setMode(mode) {
+        this.newMode = mode
+    }
+
     reset(newMode) {
 
         this.newMode = newMode

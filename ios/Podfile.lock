@@ -247,11 +247,15 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
+  - RNDeviceInfo (5.4.1):
+    - React
   - RNGestureHandler (1.5.3):
     - React
   - RNReanimated (1.4.0):
     - React
   - RNScreens (1.0.0-alpha.23):
+    - React
+  - RNVectorIcons (6.6.0):
     - React
   - UMBarCodeScannerInterface (5.0.0)
   - UMCameraInterface (5.0.0)
@@ -310,9 +314,11 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler/RNGestureHandler.podspec`)
   - RNReanimated (from `../node_modules/react-native-reanimated/RNReanimated.podspec`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - UMBarCodeScannerInterface (from `../node_modules/unimodules-barcode-scanner-interface/ios`)
   - UMCameraInterface (from `../node_modules/unimodules-camera-interface/ios`)
   - UMConstantsInterface (from `../node_modules/unimodules-constants-interface/ios`)
@@ -415,12 +421,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :podspec: "../node_modules/react-native-gesture-handler/RNGestureHandler.podspec"
   RNReanimated:
     :podspec: "../node_modules/react-native-reanimated/RNReanimated.podspec"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
   UMBarCodeScannerInterface:
     :path: !ruby/object:Pathname
     path: "../node_modules/unimodules-barcode-scanner-interface/ios"
@@ -498,9 +508,11 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
+  RNDeviceInfo: 54556486cd02538dbef727f39292d096abe0cf0e
   RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: f28b48b8345f2f5f39ed6195518291515032a788
+  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   UMBarCodeScannerInterface: 550e7ffd7a789289260bde3d547be29407e75437
   UMCameraInterface: 51e4568d64e77615557afaad9a3acdaad5d32d9f
   UMConstantsInterface: 23d658b73efc2b8090519b32007c3de725339492
@@ -515,6 +527,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: ee5b1ee1056eb338ff2d521ba79460d8cd0bae7d
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: dc2185d4ccee5351ad0b4f8ff55bdeb0f1349776
+PODFILE CHECKSUM: cdfcca568ffcf989e98f8a5e6b09b4903b2861aa
 
 COCOAPODS: 1.8.4

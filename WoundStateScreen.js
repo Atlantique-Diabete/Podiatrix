@@ -31,6 +31,7 @@ static navigationOptions = ({ navigation }) => {
     headerRight: () => (
         <View style={{marginRight: 10}}>
             <Icon style={styles.crossContainer}
+                underlayColor='transparent'
                 name='cross'
                 type='entypo' 
                 onPress={() =>  this.test(navigate) }
@@ -145,14 +146,14 @@ render() {
       <View style={{flex:1, alignItems: 'center'}}>
       <Text style={{color: '#424242', textAlign: 'center'}} h4 h4Style={{fontSize:20}}>Syndrome de Réponse Inflammatoire Systémique</Text>
       </View>
-      <View style={{flex:1, alignItems: 'center', marginTop: 10}}>
-     <Text style={{color: '#424242', textAlign: 'center'}} h4 h4Style={{fontSize:16}}>Sélectionner 2 parmi :</Text>
+      <View style={{flex:1, alignItems: 'center', marginTop: 20}}>
+     <Text h1 h1Style={{fontSize:12, fontWeight:'bold'}} style={{color: '#424242', textAlign: 'center'}} h4 h4Style={{fontSize:16}}>Oui si au moins 2 critères :</Text>
         </View>
     <View style={{marginTop:5}}>
-    <Text style={{color: '#424242'}}>- Température >38 °C ou {"<"}36°C</Text>
-    <Text style={{color: '#424242'}}>- FC > 90 bpm</Text>
-    <Text style={{color: '#424242'}}>- Fréquence respiratoire >20 cycles/minute ou PaCO2 {"<"} 32mmHg</Text>
-    <Text style={{color: '#424242'}}>- Leucocytes 12 G/L ou {"<"} 4 G/L ou 10% de formes immatures</Text>
+    <Text h1 h1Style={{fontSize:10}} style={{color: '#424242'}}>- Température >38 °C ou {"<"}36°C</Text>
+    <Text h1 h1Style={{fontSize:10}} style={{color: '#424242'}}>- FC > 90 bpm</Text>
+    <Text h1 h1Style={{fontSize:10}} style={{color: '#424242'}}>- Fréquence respiratoire >20 cycles/minute</Text>
+    <Text h1 h1Style={{fontSize:10}} style={{color: '#424242'}}>- Leucocytes 12 G/L ou {"<"} 4 G/L ou 10% de formes immatures</Text>
     </View>
     </View>
     }
